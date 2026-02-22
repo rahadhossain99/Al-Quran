@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>আল-কুরআন</title>
+    
+    <!-- Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Noto+Serif+Bengali:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons: FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        main: 'var(--bg-main)',
+                        surface: 'var(--bg-surface)',
+                        content: 'var(--text-main)',
+                        muted: 'var(--text-muted)',
+                        bordercolor: 'var(--border-color)',
+                        primary: 'var(--primary)',
+                        'primary-hover': 'var(--primary-hover)',
+                        'primary-soft': 'var(--primary-soft)',
+                        accent: 'var(--accent)',
+                        'accent-soft': 'var(--accent-soft)',
+                    },
+                    fontFamily: {
+                        arabic: ['"Amiri Quran"', 'serif'],
+                        bengali: ['"Noto Serif Bengali"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif']
+                    },
+                    boxShadow: {
+                        'app': '0 -4px 20px rgba(0, 0, 0, 0.05)',
+                        'card': '0 8px 24px rgba(0, 0, 0, 0.04)',
+                        'card-hover': '0 12px 32px rgba(0, 0, 0, 0.08)',
+                        'premium': '0 10px 40px rgba(5, 150, 105, 0.2)',
+                        'floating': '0 15px 50px rgba(0, 0, 0, 0.15)',
+                    },
+                    backgroundImage: {
+                        'islamic-pattern': "url('data:image/svg+xml,%3Csvg width=\\'60\\' height=\\'60\\' viewBox=\\'0 0 60 60\\' xmlns=\\'http://www.w3.org/2000/svg\\'%3E%3Cg fill=\\'none\\' fill-rule=\\'evenodd\\'%3E%3Cg fill=\\'%23ffffff\\' fill-opacity=\\'0.08\\'%3E%3Cpath d=\\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')"
+                    },
+                    animation: {
+                        'eq-1': 'eq 1s ease-in-out infinite alternate',
+                        'eq-2': 'eq 1.2s ease-in-out infinite alternate-reverse',
+                        'eq-3': 'eq 0.8s ease-in-out infinite alternate',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* CSS Variables for Themes & Fonts */
+        :root {
+            /* Theme Variables */
+            --bg-main: #F8FAFC;
+            --bg-surface: #FFFFFF;
+            --text-main: #0F172A;
+            --text-muted: #64748B;
+            --border-color: #E2E8F0;
+            --primary: #059669; 
+            --primary-hover: #047857;
+            --primary-soft: #D1FAE5;
+            --accent: #D97706; 
+            --accent-soft: #FEF3C7;
+
+            /* Dynamic Font Size Variables */
+            --arabic-font-size: 38px;
+            --trans-font-size: 18px;
+            --arabic-line-height: 2.2;
+        }
+
+        body.theme-dark {
+            --bg-main: #0B1120;
+            --bg-surface: #1E293B;
+            --text-main: #F8FAFC;
+            --text-muted: #94A3B8;
+            --border-color: #334155;
+            --primary: #10B981; 
+            --primary-hover: #34D399;
+            --primary-soft: #064E3B;
+            --accent: #FBBF24;
+            --accent-soft: #453411;
+        }
+
+        body.theme-sepia {
+            --bg-main: #F5EFE6;
+            --bg-surface: #FFFDF8;
+            --text-main: #5C4B37;
+            --text-muted: #8C7B66;
+            --border-color: #E8DECA;
+            --primary: #8B5A2B;
+            --primary-hover: #6B4423;
+            --primary-soft: #EEDDC3;
+            --accent: #B8860B;
+            --accent-soft: #F4E2B1;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            transition: background-color 0.4s ease, color 0.4s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Applying Dynamic Font Sizes */
+        .quran-arabic-text { 
+            font-size: var(--arabic-font-size) !important; 
+            line-height: var(--arabic-line-height) !important; 
+        }
+        .quran-translation-text { 
+            font-size: var(--trans-font-size) !important; 
+        }
+        .quran-transliteration-text { 
+            font-size: calc(var(--trans-font-size) * 0.85) !important; 
+        }
+
+        /* Custom Input Range (Slider) styling */
+        input[type=range] {
+            -webkit-appearance: none;
+            width: 100%;
+            background: transparent;
+            outline: none;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 22px;
+            width: 22px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            margin-top: -8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            transition: transform 0.1s;
+        }
+        input[type=range]::-webkit-slider-thumb:active {
+            transform: scale(1.15);
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 6px;
+            cursor: pointer;
+            background: var(--border-color);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar { width: 0px; background: transparent; }
+
+        .page-transition { animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        
+        /* Advanced Animations */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUpFade {
+            from { opacity: 0; transform: translateY(30px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .stagger-item { opacity: 0; animation: slideUpFade 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+        @keyframes starPop {
+            0% { transform: scale(1); }
+            40% { transform: scale(1.6) rotate(20deg); filter: brightness(1.2); }
+            60% { transform: scale(0.9) rotate(-10deg); }
+            100% { transform: scale(1) rotate(0); }
+        }
+        .animate-star-pop { animation: starPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+
+        @keyframes eq {
+            0% { height: '4px' }
+            100% { height: '18px' }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) }
+            50% { transform: translateY(-10px) }
+        }
+
+        .ayah-active {
+            background: linear-gradient(135deg, var(--accent-soft), transparent) !important;
+            border-left: 5px solid var(--accent) !important;
+            border-right: 5px solid var(--accent) !important;
+            transform: scale(1.02);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+            z-index: 10;
+        }
+
+        /* Responsive Safe Areas & Padding */
+        .nav-height { height: 72px; }
+        #main-content { padding-bottom: calc(env(safe-area-inset-bottom) + 90px); transition: padding 0.4s ease; }
+        .player-active-padding { padding-bottom: calc(env(safe-area-inset-bottom) + 200px) !important; }
+
+        /* Nav & Badges */
+        .nav-item.active { color: var(--primary); }
+        .nav-item.active .nav-icon-bg {
+            background-color: var(--primary-soft);
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .surah-number-badge {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23059669" d="M50 0L61.8 38.2L100 50L61.8 61.8L50 100L38.2 61.8L0 50L38.2 38.2Z" opacity="0.15"/></svg>');
+            background-size: cover;
+            background-position: center;
+        }
+        body.theme-dark .surah-number-badge {
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%2310b981" d="M50 0L61.8 38.2L100 50L61.8 61.8L50 100L38.2 61.8L0 50L38.2 38.2Z" opacity="0.2"/></svg>');
+        }
+        
+        /* Toast Notification */
+        #toast {
+            visibility: hidden;
+            min-width: 280px;
+            text-align: center;
+            border-radius: 16px;
+            padding: 16px;
+            position: fixed;
+            z-index: 999;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            bottom: 110px;
+            font-size: 14px;
+            font-weight: 700;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        #toast.show {
+            visibility: visible;
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        .toast-success { background-color: var(--primary); color: #fff; }
+        .toast-error { background-color: #ef4444; color: #fff; }
+        .toast-info { background-color: var(--surface); color: var(--content); border: 2px solid var(--border-color); }
+
+        .player-hidden { opacity: 0; pointer-events: none; transform: translateY(150%) scale(0.9); }
+        .player-visible { opacity: 1; pointer-events: auto; transform: translateY(0) scale(1); }
+
+        .glass-card {
+            background: linear-gradient(135deg, rgba(var(--bg-surface-rgb), 0.9), rgba(var(--bg-surface-rgb), 0.6));
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+        }
+        body.theme-dark .glass-card {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.6));
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* Custom Qari List Selection */
+        .qari-option.active {
+            border-color: var(--primary);
+            background-color: var(--primary-soft);
+        }
+        .qari-option.active .qari-icon {
+            background-color: var(--primary);
+            color: white;
+            box-shadow: 0 4px 10px rgba(5, 150, 105, 0.3);
+        }
+        .qari-option.active .qari-check {
+            opacity: 1;
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body class="font-bengali min-h-screen selection:bg-primary-soft selection:text-primary" id="app-body">
+
+    <!-- Top Header -->
+    <header class="bg-surface/90 backdrop-blur-xl sticky top-0 z-40 border-b border-bordercolor shadow-sm transition-colors duration-400">
+        <div class="max-w-md md:max-w-2xl mx-auto px-5 py-3 md:py-4 flex items-center justify-between">
+            <div class="flex items-center">
+                <button id="back-btn" onclick="app.closeSurah()" class="hidden w-10 h-10 flex items-center justify-center rounded-full text-content hover:bg-main hover:scale-105 transition-all mr-2">
+                    <i class="fa-solid fa-arrow-left text-xl"></i>
+                </button>
+                <div class="flex items-center space-x-3" id="app-title">
+                    <div class="w-10 h-10 rounded-[14px] bg-gradient-to-br from-primary to-primary-hover flex items-center justify-center shadow-lg transform hover:scale-105 transition-transform">
+                        <i class="fa-solid fa-book-quran text-white text-base"></i>
+                    </div>
+                    <h1 class="text-2xl md:text-3xl font-extrabold font-sans text-content leading-tight tracking-tight">আল-কুরআন</h1>
+                </div>
+                <h1 id="surah-title" class="hidden text-xl font-extrabold font-sans text-content truncate max-w-[200px] md:max-w-md"></h1>
+            </div>
+            <div class="flex items-center space-x-2">
+                <button id="header-search-btn" onclick="document.getElementById('search-input').focus()" class="w-11 h-11 flex items-center justify-center rounded-full text-muted hover:text-primary hover:bg-primary-soft transition-all transform hover:scale-105">
+                    <i class="fa-solid fa-magnifying-glass text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-md md:max-w-2xl mx-auto w-full px-4 pt-5 transition-all duration-400" id="main-content">
+        
+        <!-- HOME TAB -->
+        <div id="tab-home" class="page-transition">
+            <!-- Hero Banner -->
+            <div class="bg-gradient-to-br from-primary via-primary-hover to-primary rounded-[2rem] p-8 mb-6 text-white relative overflow-hidden shadow-premium group">
+                <div class="absolute inset-0 bg-islamic-pattern pointer-events-none mix-blend-overlay opacity-50 group-hover:opacity-70 transition-opacity duration-700"></div>
+                <div class="absolute -right-10 -top-10 w-48 h-48 bg-accent rounded-full blur-[3xl] opacity-40 pointer-events-none animate-pulse-slow"></div>
+                <div class="absolute -left-10 -bottom-10 w-32 h-32 bg-white rounded-full blur-[2xl] opacity-20 pointer-events-none"></div>
+                
+                <div class="relative z-10">
+                    <h2 class="text-3xl md:text-4xl font-extrabold mb-2 font-sans drop-shadow-md">আসসালামু আলাইকুম</h2>
+                    <p class="text-white/95 text-base font-semibold mb-6 drop-shadow-sm">পবিত্র কুরআনুল কারিম পড়ুন এবং শুনুন</p>
+                    
+                    <div class="relative bg-black/25 backdrop-blur-xl rounded-2xl flex items-center px-5 py-4 border border-white/20 shadow-inner group-hover:bg-black/30 transition-colors">
+                        <i class="fa-solid fa-search text-accent text-xl drop-shadow-sm"></i>
+                        <input type="text" id="search-input" oninput="app.filterSurahs()" placeholder="সূরা অনুসন্ধান করুন..." class="bg-transparent border-none outline-none w-full ml-4 text-white placeholder-white/70 font-bold text-base md:text-lg">
+                    </div>
+                </div>
+            </div>
+
+            <!-- LAST PLAYED WIDGET -->
+            <div id="last-played-container" class="hidden mb-8 stagger-item" style="animation-delay: 0.1s">
+                <h3 class="text-lg font-extrabold text-content mb-3 flex items-center"><i class="fa-solid fa-clock-rotate-left text-accent mr-2.5 text-lg"></i> সর্বশেষ পঠিত</h3>
+                <div onclick="app.resumeLastPlayed()" class="glass-card relative overflow-hidden rounded-[1.8rem] p-5 shadow-card hover:shadow-premium transition-all duration-400 cursor-pointer group">
+                    <div class="absolute inset-0 bg-islamic-pattern opacity-10 dark:opacity-5 group-hover:scale-110 transition-transform duration-[2s]"></div>
+                    <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-primary rounded-full blur-2xl opacity-10 group-hover:opacity-20 transition-opacity"></div>
+                    
+                    <div class="relative z-10 flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-primary-hover flex flex-col items-center justify-center shadow-md border border-white/20 group-hover:scale-105 transition-transform">
+                                <span class="text-[10px] text-white/80 font-bold uppercase tracking-widest -mb-1">সূরা</span>
+                                <span id="last-played-surah-num" class="text-white font-extrabold text-xl drop-shadow-sm">--</span>
+                            </div>
+                            <div>
+                                <p class="text-xs font-extrabold text-accent uppercase tracking-widest mb-1 flex items-center">
+                                    <i class="fa-solid fa-play text-[10px] mr-1.5"></i> পুনরায় শুরু করুন
+                                </p>
+                                <h4 id="last-played-surah-name" class="font-extrabold text-xl text-content font-sans tracking-tight">--</h4>
+                                <p id="last-played-ayah-info" class="text-xs font-bold text-muted mt-0.5">আয়াত --</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p id="last-played-arabic" class="text-3xl font-arabic text-primary opacity-80 group-hover:scale-110 transition-transform duration-500">--</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-between mb-5 px-2 stagger-item" style="animation-delay: 0.2s">
+                <h3 class="text-xl font-extrabold text-content flex items-center"><i class="fa-solid fa-list-ul text-primary mr-2.5 text-lg"></i> সকল সূরা</h3>
+                <span class="text-sm font-extrabold bg-primary-soft text-primary px-4 py-1.5 rounded-full border border-primary/20 shadow-sm">১১৪ টি</span>
+            </div>
+
+            <!-- Loading Spinner -->
+            <div id="home-loading" class="py-24 text-center">
+                <div class="w-14 h-14 border-4 border-primary-soft border-t-primary rounded-full animate-spin mx-auto mb-5 shadow-sm"></div>
+                <p class="text-primary font-bold text-base">ডেটা লোড হচ্ছে...</p>
+            </div>
+
+            <!-- Surahs List -->
+            <div id="surah-grid" class="flex flex-col space-y-4 pb-4">
+                <!-- Injected via JS -->
+            </div>
+            
+            <div id="empty-state" class="text-center py-20 hidden bg-surface rounded-[2rem] border border-bordercolor shadow-sm mt-4">
+                <div class="w-20 h-20 bg-main rounded-full flex items-center justify-center mx-auto mb-5 border border-bordercolor shadow-inner">
+                    <i class="fa-solid fa-folder-open text-4xl text-muted/40 animate-pulse"></i>
+                </div>
+                <h3 class="text-xl font-extrabold text-content mb-1">কোনো সূরা পাওয়া যায়নি</h3>
+                <p class="text-muted text-sm font-semibold">সঠিক নাম দিয়ে আবার চেষ্টা করুন</p>
+            </div>
+        </div>
+
+        <!-- FAVORITES TAB -->
+        <div id="tab-favorites" class="hidden page-transition">
+            <div class="bg-surface rounded-[2rem] p-8 mb-8 text-center border border-bordercolor shadow-card relative overflow-hidden group">
+                <div class="absolute inset-0 bg-gradient-to-b from-accent/10 to-transparent"></div>
+                <div class="w-20 h-20 mx-auto bg-accent-soft rounded-full flex items-center justify-center mb-4 relative z-10 shadow-inner border border-accent/20 group-hover:scale-110 transition-transform">
+                    <i class="fa-solid fa-bookmark text-3xl text-accent drop-shadow-sm"></i>
+                </div>
+                <h2 class="text-3xl font-extrabold text-content relative z-10 font-sans tracking-tight">বুকমার্ক সমূহ</h2>
+                <p class="text-muted text-base font-semibold mt-2 relative z-10">আপনার পছন্দের সংরক্ষিত সূরাগুলো</p>
+            </div>
+
+            <div id="favorites-grid" class="flex flex-col space-y-4 pb-4"></div>
+
+            <div id="fav-empty-state" class="text-center py-24 hidden">
+                <div class="w-24 h-24 bg-surface rounded-full flex items-center justify-center mx-auto mb-6 border-2 border-dashed border-bordercolor shadow-sm">
+                    <i class="fa-regular fa-bookmark text-4xl text-muted/30"></i>
+                </div>
+                <h3 class="text-2xl font-extrabold text-content mb-2">কোনো বুকমার্ক নেই</h3>
+                <p class="text-muted text-base font-semibold">সূরা পড়ার সময় স্টারে ক্লিক করে সেভ করুন</p>
+            </div>
+        </div>
+
+        <!-- SETTINGS TAB -->
+        <div id="tab-settings" class="hidden page-transition pb-4">
+            <!-- Branding Card -->
+            <div class="bg-gradient-to-br from-surface to-main rounded-[2.5rem] p-10 mb-8 border border-bordercolor shadow-card text-center relative overflow-hidden group">
+                <div class="absolute -right-8 -bottom-8 w-40 h-40 bg-primary/10 rounded-full blur-[2xl] group-hover:scale-150 transition-transform duration-700"></div>
+                <div class="absolute -left-8 -top-8 w-32 h-32 bg-accent/10 rounded-full blur-[2xl] group-hover:scale-150 transition-transform duration-700"></div>
+                
+                <div class="w-28 h-28 mx-auto bg-gradient-to-tr from-primary via-primary-hover to-accent rounded-[2rem] p-[3px] mb-5 shadow-xl relative z-10 transform rotate-3 group-hover:rotate-0 transition-transform duration-500 animate-float">
+                    <div class="w-full h-full bg-surface rounded-[1.8rem] flex items-center justify-center">
+                        <i class="fa-solid fa-book-quran text-5xl text-primary drop-shadow-md"></i>
+                    </div>
+                </div>
+                <h2 class="text-4xl font-extrabold font-sans text-content relative z-10 tracking-tight">আল-কুরআন</h2>
+                <p class="text-muted text-base font-bold mt-2 relative z-10 bg-main px-4 py-1.5 rounded-full inline-block border border-bordercolor shadow-inner">পবিত্র কুরআনুল কারিম</p>
+            </div>
+
+            <h3 class="text-sm font-extrabold text-muted uppercase tracking-[0.2em] mb-4 px-3">অ্যাপ সেটিংস</h3>
+            
+            <div class="bg-surface rounded-[2rem] border border-bordercolor shadow-card overflow-hidden mb-6">
+                <!-- Advanced Font Size Controller -->
+                <div class="p-6 md:p-8 border-b border-bordercolor/60">
+                    <div class="flex items-center space-x-4 mb-6">
+                        <div class="w-12 h-12 rounded-2xl bg-accent-soft text-accent flex items-center justify-center text-xl shadow-inner border border-accent/20">
+                            <i class="fa-solid fa-text-height"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-extrabold text-content text-lg">অক্ষরের আকার (Font Size)</h4>
+                        </div>
+                    </div>
+                    
+                    <!-- Font Sliders -->
+                    <div class="space-y-6">
+                        <div class="bg-main/50 p-5 rounded-[1.5rem] border border-bordercolor/50">
+                            <div class="flex justify-between items-center mb-4">
+                                <label class="text-base font-extrabold text-content">আরবি ফন্ট</label>
+                                <span id="arabic-size-val" class="text-sm font-extrabold bg-primary-soft px-3 py-1 rounded-lg text-primary shadow-inner">38px</span>
+                            </div>
+                            <input type="range" id="arabic-slider" min="24" max="60" value="38" step="1">
+                        </div>
+
+                        <div class="bg-main/50 p-5 rounded-[1.5rem] border border-bordercolor/50">
+                            <div class="flex justify-between items-center mb-4">
+                                <label class="text-base font-extrabold text-content">বাংলা ও উচ্চারণ ফন্ট</label>
+                                <span id="trans-size-val" class="text-sm font-extrabold bg-primary-soft px-3 py-1 rounded-lg text-primary shadow-inner">18px</span>
+                            </div>
+                            <input type="range" id="trans-slider" min="14" max="30" value="18" step="1">
+                        </div>
+                    </div>
+
+                    <!-- Live Preview Box -->
+                    <h5 class="text-[11px] font-extrabold text-muted uppercase tracking-[0.2em] mb-3 mt-8">প্রিভিউ (Preview)</h5>
+                    <div class="bg-surface rounded-[1.5rem] p-5 border border-bordercolor shadow-card relative overflow-hidden group">
+                        <!-- Arabic -->
+                        <div class="text-right mb-5">
+                            <p class="font-arabic text-content drop-shadow-sm transition-all duration-300 quran-arabic-text" dir="rtl">
+                                بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ <span class="text-primary/70 mx-2 font-normal">۝</span>
+                            </p>
+                        </div>
+                        <!-- Translation & Transliteration -->
+                        <div class="bg-main/60 rounded-[1.2rem] p-5 border border-bordercolor space-y-3">
+                            <div>
+                                <p class="font-bold text-content font-bengali transition-all duration-300 quran-translation-text">
+                                    পরম করুণাময় অসীম দয়ালু আল্লাহর নামে।
+                                </p>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-muted font-sans border-l-4 border-accent/40 pl-3 py-1 transition-all duration-300 quran-transliteration-text">
+                                    Bismillaahir Rahmaanir Raheem
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Theme Select -->
+                <div class="p-6 md:p-8 border-b border-bordercolor/60">
+                    <div class="flex items-center space-x-4 mb-5">
+                        <div class="w-12 h-12 rounded-2xl bg-primary-soft text-primary flex items-center justify-center text-xl shadow-inner border border-primary/20">
+                            <i class="fa-solid fa-palette"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-extrabold text-content text-lg">অ্যাপ থিম</h4>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-3 gap-3 md:gap-4">
+                        <button onclick="app.setTheme('light')" id="theme-btn-light" class="py-4 rounded-2xl text-base font-bold border transition-all text-muted border-bordercolor bg-main hover:bg-surface shadow-sm">লাইট</button>
+                        <button onclick="app.setTheme('dark')" id="theme-btn-dark" class="py-4 rounded-2xl text-base font-bold border transition-all text-muted border-bordercolor bg-main hover:bg-surface shadow-sm">ডার্ক</button>
+                        <button onclick="app.setTheme('sepia')" id="theme-btn-sepia" class="py-4 rounded-2xl text-base font-bold border transition-all text-muted border-bordercolor bg-main hover:bg-surface shadow-sm">সেপিয়া</button>
+                    </div>
+                    <p class="text-xs font-bold text-muted mt-4 text-center">থিম সিলেক্ট না করলে এটি আপনার মোবাইলের সাথে স্বয়ংক্রিয়ভাবে মানিয়ে নেবে।</p>
+                </div>
+
+                <!-- Custom App-like Qari Select List -->
+                <div class="p-6 md:p-8 bg-surface">
+                    <div class="flex items-center space-x-4 mb-5">
+                        <div class="w-12 h-12 rounded-2xl bg-accent-soft text-accent flex items-center justify-center text-xl shadow-inner border border-accent/20">
+                            <i class="fa-solid fa-headphones"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-extrabold text-content text-lg">তেলাওয়াতকারী নির্বাচন</h4>
+                        </div>
+                    </div>
+                    
+                    <div id="qari-list-container" class="space-y-3 max-h-[350px] overflow-y-auto pr-2 pb-2 rounded-xl custom-scrollbar">
+                        <!-- Injected via JS -->
+                    </div>
+                </div>
+            </div>
+            <div class="h-10"></div>
+        </div>
+
+        <!-- SURAH DETAIL VIEW (READING MODE) -->
+        <div id="surah-view" class="hidden page-transition">
+            <div id="details-loading" class="py-40 text-center hidden">
+                <div class="w-16 h-16 border-[5px] border-primary-soft border-t-primary rounded-full animate-spin mx-auto mb-5 shadow-md"></div>
+                <p class="text-primary font-extrabold text-base">আয়াত প্রস্তুত করা হচ্ছে...</p>
+            </div>
+            <div id="surah-content" class="hidden"></div>
+            <div class="h-12"></div>
+        </div>
+    </main>
+
+    <!-- FLOATING APP AUDIO PLAYER -->
+    <div id="global-player" class="fixed left-0 right-0 z-[60] px-4 md:px-0 mx-auto max-w-md md:max-w-2xl transition-all duration-500 player-hidden">
+        <div class="bg-surface/95 backdrop-blur-2xl border border-white/50 dark:border-white/10 shadow-floating rounded-[2rem] overflow-hidden relative cursor-pointer group" onclick="app.returnToCurrentSurah()">
+            <!-- Progress Bar -->
+            <div class="w-full h-2 bg-bordercolor/80 absolute top-0 left-0 z-20 cursor-pointer hover:h-3 transition-all" onclick="app.seekAudio(event)">
+                <div id="progress-bar" class="h-full bg-gradient-to-r from-primary via-primary-hover to-accent relative w-0 transition-all duration-200">
+                    <div class="absolute right-0 top-1/2 transform -translate-y-1/2 w-4 h-4 bg-white rounded-full shadow-md border-2 border-primary/30 scale-0 group-hover:scale-100 transition-transform duration-300"></div>
+                </div>
+            </div>
+            
+            <div class="px-5 py-4 md:py-5 flex items-center justify-between pt-5 md:pt-6 group-hover:bg-primary-soft/5 transition-colors">
+                <!-- Left Info & EQ Animation -->
+                <div class="flex items-center flex-1 overflow-hidden pr-3">
+                    <div class="relative w-14 h-14 rounded-[1.2rem] bg-gradient-to-br from-primary-soft to-main text-primary flex items-center justify-center font-extrabold text-xl mr-4 shadow-inner border border-primary/20 flex-shrink-0">
+                        <span id="player-ayah-num" class="relative z-10 text-primary drop-shadow-sm">--</span>
+                        
+                        <!-- Animated EQ Bar -->
+                        <div id="player-eq" class="absolute inset-0 bg-gradient-to-br from-primary to-primary-hover rounded-[1.2rem] flex items-center justify-center space-x-1 hidden transition-opacity shadow-md">
+                            <div class="w-1.5 bg-white animate-eq-1 rounded-full drop-shadow-sm"></div>
+                            <div class="w-1.5 bg-white animate-eq-2 rounded-full drop-shadow-sm"></div>
+                            <div class="w-1.5 bg-white animate-eq-3 rounded-full drop-shadow-sm"></div>
+                        </div>
+                    </div>
+                    <div class="truncate">
+                        <p class="text-[11px] uppercase font-extrabold text-accent tracking-[0.2em] mb-1 flex items-center">
+                            <span id="now-playing-label">Now Playing</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square ml-2 text-[9px] opacity-0 group-hover:opacity-100 transition-all transform group-hover:translate-x-1 group-hover:-translate-y-1"></i>
+                        </p>
+                        <p id="player-surah-name" class="text-lg font-extrabold text-content truncate font-sans tracking-tight">নির্বাচন করুন</p>
+                    </div>
+                </div>
+
+                <!-- Right Controls -->
+                <div class="flex items-center space-x-4 md:space-x-6" onclick="event.stopPropagation()">
+                    <button onclick="app.toggleLoop()" id="loop-btn" class="w-10 h-10 flex items-center justify-center rounded-full text-muted hover:bg-main hover:scale-110 transition-all text-base" title="রিপিট">
+                        <i class="fa-solid fa-repeat"></i>
+                    </button>
+                    <button onclick="app.playPrev()" class="w-10 h-10 flex items-center justify-center rounded-full text-content hover:text-primary hover:bg-primary-soft/50 transition-all text-xl active:scale-90">
+                        <i class="fa-solid fa-backward-step"></i>
+                    </button>
+                    <button onclick="app.togglePlayPause()" id="play-pause-btn" class="w-16 h-16 flex items-center justify-center bg-gradient-to-br from-primary to-primary-hover text-white rounded-[1.5rem] hover:shadow-premium hover:scale-105 transition-all active:scale-95 shadow-lg border-4 border-surface">
+                        <i class="fa-solid fa-play text-2xl ml-1" id="play-pause-icon"></i>
+                    </button>
+                    <button onclick="app.playNext()" class="w-10 h-10 flex items-center justify-center rounded-full text-content hover:text-primary hover:bg-primary-soft/50 transition-all text-xl active:scale-90">
+                        <i class="fa-solid fa-forward-step"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTTOM NAVIGATION BAR -->
+    <nav id="bottom-nav" class="nav-height fixed bottom-0 w-full bg-surface/95 backdrop-blur-2xl border-t border-bordercolor flex justify-around items-center pb-[env(safe-area-inset-bottom)] z-50 transition-transform duration-500 shadow-[0_-15px_40px_rgba(0,0,0,0.04)]">
+        <button onclick="app.switchTab('home')" id="nav-btn-home" class="nav-item active flex flex-col items-center flex-1 w-full h-full justify-center group relative">
+            <div class="nav-icon-bg w-14 h-9 rounded-full flex items-center justify-center transition-all duration-400 mb-1 text-2xl group-hover:text-primary group-hover:bg-primary-soft/80">
+                <i class="fa-solid fa-house"></i>
+            </div>
+            <span class="text-[11px] font-extrabold tracking-wide">হোম</span>
+        </button>
+
+        <button onclick="app.switchTab('favorites')" id="nav-btn-favorites" class="nav-item flex flex-col items-center flex-1 w-full h-full justify-center group relative text-muted">
+            <div class="nav-icon-bg w-14 h-9 rounded-full flex items-center justify-center transition-all duration-400 mb-1 text-2xl group-hover:text-primary group-hover:bg-primary-soft/80">
+                <i class="fa-solid fa-bookmark"></i>
+            </div>
+            <span class="text-[11px] font-extrabold tracking-wide">বুকমার্ক</span>
+        </button>
+
+        <button onclick="app.switchTab('settings')" id="nav-btn-settings" class="nav-item flex flex-col items-center flex-1 w-full h-full justify-center group relative text-muted">
+            <div class="nav-icon-bg w-14 h-9 rounded-full flex items-center justify-center transition-all duration-400 mb-1 text-2xl group-hover:text-primary group-hover:bg-primary-soft/80">
+                <i class="fa-solid fa-gear"></i>
+            </div>
+            <span class="text-[11px] font-extrabold tracking-wide">সেটিংস</span>
+        </button>
+    </nav>
+
+    <!-- Error/Success Toast -->
+    <div id="toast">
+        <i id="toast-icon" class="fa-solid fa-check-circle text-xl"></i> 
+        <span id="toast-msg">বার্তা</span>
+    </div>
+
+    <audio id="quran-audio" class="hidden" playsinline preload="auto"></audio>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        const app = {
+            state: {
+                surahs: [],
+                favorites: JSON.parse(localStorage.getItem('quran_favorites') || '[]').map(Number),
+                lastPlayed: JSON.parse(localStorage.getItem('quran_last_played') || 'null'),
+                qari: localStorage.getItem('quran_qari') || 'ar.alafasy', 
+                currentTab: 'home', 
+                currentSurah: null,
+                surahDetails: null, 
+                viewingSurah: null, 
+                searchQuery: '',
+                isPlaying: false,
+                currentAyahIndex: -1,
+                isLooping: false,
+                isAudioLoading: false
+            },
+            
+            qarisList: [
+                { id: 'ar.alafasy', name: 'মিশারি আল-আফাসি', enName: 'Mishary Rashid Alafasy' },
+                { id: 'ar.abdurrahmaansudais', name: 'আব্দুর রহমান আস-সুদাইস', enName: 'Abdur-Rahman as-Sudais' },
+                { id: 'ar.abdulbasitmurattal', name: 'আব্দুল বাসিত মুরাত্তাল', enName: 'AbdulBaset AbdulSamad' },
+                { id: 'ar.husary', name: 'খলিল আল-হুসারি', enName: 'Mahmoud Khalil Al-Husary' },
+                { id: 'ar.saadalghamidi', name: 'সাদ আল-গামদি', enName: 'Saad al-Ghamidi' },
+                { id: 'ar.mahermuaiqly', name: 'মাহের আল মুআইক্লি', enName: 'Maher Al Muaiqly' },
+                { id: 'ar.minshawi', name: 'মুহাম্মাদ আল-মিনশাভি', enName: 'Al-Minshawi' },
+                { id: 'ar.shuraym', name: 'সাউদ আশ-শুরাইম', enName: 'Saud Al-Shuraim' },
+                { id: 'ar.yasserdossari', name: 'ইয়াসির আদ-দুসারি', enName: 'Yasser Al-Dosari' },
+                { id: 'ar.hudhaify', name: 'আলী আল-হুদাইফি', enName: 'Ali Al-Hudhaify' }
+            ],
+
+            audio: document.getElementById('quran-audio'),
+
+            init: function() {
+                // Initialize Theme
+                this.initTheme();
+                
+                // Initialize Fonts Settings
+                this.initFonts();
+                
+                // Render Settings Lists
+                this.renderQariList();
+
+                // Setup Audio and Data
+                this.setupAudioListeners();
+                this.fetchSurahsList();
+                this.adjustPlayerPosition(); 
+                this.setupMediaSession();
+                this.updateLastPlayedUI(); 
+
+                // Event Listeners for Font Sliders
+                document.getElementById('arabic-slider').addEventListener('input', (e) => this.updateArabicFontSize(e.target.value));
+                document.getElementById('trans-slider').addEventListener('input', (e) => this.updateTransFontSize(e.target.value));
+            },
+
+            // --- THEME LOGIC ---
+            initTheme: function() {
+                const savedTheme = localStorage.getItem('quran_theme_setting');
+                
+                if (savedTheme) {
+                    this.applyThemeClass(savedTheme);
+                    this.updateThemeButtons(savedTheme);
+                } else {
+                    this.applySystemTheme();
+                }
+                
+                // Auto detect changes if user hasn't forced a theme
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                    if (!localStorage.getItem('quran_theme_setting')) {
+                        this.applySystemTheme();
+                    }
+                });
+            },
+
+            applySystemTheme: function() {
+                const isSystemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                this.applyThemeClass(isSystemDark ? 'dark' : 'light');
+                this.updateThemeButtons(null); // Clear selected buttons styling
+            },
+
+            setTheme: function(themeName) {
+                localStorage.setItem('quran_theme_setting', themeName);
+                this.applyThemeClass(themeName);
+                this.updateThemeButtons(themeName);
+            },
+
+            applyThemeClass: function(themeName) {
+                document.body.classList.remove('theme-light', 'theme-dark', 'theme-sepia');
+                if (themeName) {
+                    document.body.classList.add(`theme-${themeName}`);
+                }
+            },
+
+            updateThemeButtons: function(activeTheme) {
+                ['light', 'dark', 'sepia'].forEach(t => {
+                    const btn = document.getElementById(`theme-btn-${t}`);
+                    if(btn) {
+                        if(t === activeTheme) {
+                            btn.className = "py-4 rounded-2xl text-base font-extrabold border-2 transition-all bg-primary-soft text-primary border-primary shadow-inner scale-105 transform";
+                        } else {
+                            btn.className = "py-4 rounded-2xl text-base font-bold border transition-all text-muted border-bordercolor bg-surface hover:bg-main shadow-sm";
+                        }
+                    }
+                });
+            },
+
+            // --- ADVANCED FONT SETTINGS ---
+            initFonts: function() {
+                const savedArabicSize = localStorage.getItem('arabic_font_size') || '38';
+                const savedTransSize = localStorage.getItem('trans_font_size') || '18';
+                
+                document.getElementById('arabic-slider').value = savedArabicSize;
+                document.getElementById('trans-slider').value = savedTransSize;
+                
+                this.updateArabicFontSize(savedArabicSize, false);
+                this.updateTransFontSize(savedTransSize, false);
+            },
+
+            updateArabicFontSize: function(size, save = true) {
+                document.documentElement.style.setProperty('--arabic-font-size', `${size}px`);
+                document.documentElement.style.setProperty('--arabic-line-height', size > 44 ? '2.4' : '2.2');
+                document.getElementById('arabic-size-val').innerText = `${size}px`;
+                if(save) localStorage.setItem('arabic_font_size', size);
+            },
+
+            updateTransFontSize: function(size, save = true) {
+                document.documentElement.style.setProperty('--trans-font-size', `${size}px`);
+                document.getElementById('trans-size-val').innerText = `${size}px`;
+                if(save) localStorage.setItem('trans_font_size', size);
+            },
+
+            // --- QARI LIST UI ---
+            renderQariList: function() {
+                const container = document.getElementById('qari-list-container');
+                let html = '';
+                
+                this.qarisList.forEach(qari => {
+                    const isActive = this.state.qari === qari.id;
+                    const activeClass = isActive ? 'active' : 'border-transparent hover:border-bordercolor';
+                    
+                    html += `
+                        <div onclick="app.changeQari('${qari.id}')" class="qari-option ${activeClass} bg-main border-2 rounded-2xl p-4 flex items-center justify-between cursor-pointer transition-all duration-300 group">
+                            <div class="flex items-center space-x-4">
+                                <div class="qari-icon w-12 h-12 rounded-[1rem] bg-surface text-muted flex items-center justify-center text-lg shadow-sm group-hover:text-primary transition-all">
+                                    <i class="fa-solid fa-microphone"></i>
+                                </div>
+                                <div>
+                                    <h5 class="font-extrabold text-content text-base tracking-tight">${qari.name}</h5>
+                                    <p class="text-[11px] font-bold text-muted">${qari.enName}</p>
+                                </div>
+                            </div>
+                            <div class="qari-check w-6 h-6 rounded-full bg-primary text-white flex items-center justify-center text-[10px] opacity-0 transform scale-50 transition-all duration-300">
+                                <i class="fa-solid fa-check"></i>
+                            </div>
+                        </div>
+                    `;
+                });
+                container.innerHTML = html;
+            },
+
+            changeQari: function(qariId) {
+                this.state.qari = qariId;
+                localStorage.setItem('quran_qari', qariId);
+                this.renderQariList();
+                
+                if (this.state.surahDetails && this.state.currentSurah) {
+                    const wasPlaying = this.state.isPlaying;
+                    const currentIndex = this.state.currentAyahIndex;
+                    
+                    this.pauseAudio();
+                    this.showToast('ক্বারীর অডিও আপডেট করা হচ্ছে...', 'info');
+                    
+                    fetch(`https://api.alquran.cloud/v1/surah/${this.state.currentSurah}/editions/${qariId}`)
+                        .then(res => res.json())
+                        .then(data => {
+                            if(!data.data || !data.data[0] || !data.data[0].ayahs) {
+                                this.showToast('এই ক্বারীর অডিও উপলব্ধ নেই।', 'error');
+                                return;
+                            }
+                            const newAudio = data.data[0].ayahs;
+                            this.state.surahDetails.ayahs.forEach((a, i) => {
+                                a.audioUrl = newAudio[i].audio;
+                            });
+                            this.showToast('অডিও আপডেট সফল হয়েছে', 'success');
+                            
+                            if (wasPlaying && currentIndex > -1) {
+                                this.playAyah(currentIndex);
+                            }
+                        }).catch(() => {
+                            this.showToast('সার্ভার থেকে অডিও আনতে সমস্যা হয়েছে।', 'error');
+                        });
+                }
+            },
+
+            showToast: function(message, type = 'success') {
+                const toast = document.getElementById("toast");
+                const icon = document.getElementById("toast-icon");
+                const msg = document.getElementById("toast-msg");
+                
+                msg.innerText = message;
+                
+                toast.className = ""; 
+                if(type === 'success') {
+                    icon.className = "fa-solid fa-check-circle text-2xl drop-shadow-md";
+                    toast.classList.add("toast-success");
+                } else if(type === 'error') {
+                    icon.className = "fa-solid fa-triangle-exclamation text-2xl drop-shadow-md";
+                    toast.classList.add("toast-error");
+                } else {
+                    icon.className = "fa-solid fa-info-circle text-2xl text-primary drop-shadow-md";
+                    toast.classList.add("toast-info");
+                }
+                
+                toast.classList.add("show");
+                setTimeout(() => { toast.classList.remove("show"); }, 3000);
+            },
+
+            switchTab: function(tabName) {
+                if (!document.getElementById('surah-view').classList.contains('hidden')) {
+                    this.closeSurah();
+                }
+
+                this.state.currentTab = tabName;
+                
+                ['home', 'favorites', 'settings'].forEach(tab => {
+                    document.getElementById(`tab-${tab}`).classList.add('hidden');
+                    const btn = document.getElementById(`nav-btn-${tab}`);
+                    btn.classList.remove('active', 'text-primary');
+                    btn.classList.add('text-muted');
+                });
+
+                document.getElementById(`tab-${tabName}`).classList.remove('hidden');
+                const activeBtn = document.getElementById(`nav-btn-${tabName}`);
+                activeBtn.classList.remove('text-muted');
+                activeBtn.classList.add('active', 'text-primary');
+
+                if (tabName === 'favorites') this.renderFavoritesGrid();
+
+                this.adjustPlayerPosition();
+                document.getElementById('header-search-btn').style.display = tabName === 'home' ? 'flex' : 'none';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            },
+
+            adjustPlayerPosition: function() {
+                const player = document.getElementById('global-player');
+                const bottomNav = document.getElementById('bottom-nav');
+                const mainContent = document.getElementById('main-content');
+                const isSurahView = !document.getElementById('surah-view').classList.contains('hidden');
+
+                if (this.state.surahDetails !== null) {
+                    player.classList.remove('player-hidden');
+                    player.classList.add('player-visible');
+                    mainContent.classList.add('player-active-padding');
+
+                    if (isSurahView) {
+                        bottomNav.style.transform = 'translateY(150%)';
+                        player.style.bottom = '24px';
+                    } else {
+                        bottomNav.style.transform = 'translateY(0)';
+                        const navHeight = bottomNav.offsetHeight || 72;
+                        player.style.bottom = `${navHeight + 20}px`; 
+                    }
+                } else {
+                    player.classList.add('player-hidden');
+                    player.classList.remove('player-visible');
+                    bottomNav.style.transform = 'translateY(0)';
+                    mainContent.classList.remove('player-active-padding');
+                }
+            },
+
+            setupMediaSession: function() {
+                if ('mediaSession' in navigator) {
+                    navigator.mediaSession.setActionHandler('play', () => { this.togglePlayPause(); });
+                    navigator.mediaSession.setActionHandler('pause', () => { this.togglePlayPause(); });
+                    navigator.mediaSession.setActionHandler('previoustrack', () => { this.playPrev(); });
+                    navigator.mediaSession.setActionHandler('nexttrack', () => { this.playNext(); });
+                }
+            },
+
+            updateMediaSessionData: function() {
+                if ('mediaSession' in navigator && this.state.surahDetails) {
+                    const s = this.state.surahDetails;
+                    const qariObj = this.qarisList.find(q => q.id === this.state.qari);
+                    const qariName = qariObj ? qariObj.enName : 'Quran';
+                    let ayahNum = 1;
+                    if(this.state.currentAyahIndex > -1) {
+                        ayahNum = s.ayahs[this.state.currentAyahIndex].numberInSurah;
+                    }
+
+                    navigator.mediaSession.metadata = new MediaMetadata({
+                        title: `${s.englishName} - আয়াত ${ayahNum}`,
+                        artist: qariName,
+                        album: 'আল-কুরআন',
+                        artwork: [{ src: 'https://cdn-icons-png.flaticon.com/512/3596/3596136.png', sizes: '512x512', type: 'image/png' }]
+                    });
+                }
+            },
+
+            saveLastPlayed: function(surahNumber, ayahIndex, surahName, arabicName, ayahNumberInSurah) {
+                const data = { surahNumber, ayahIndex, surahName, arabicName, ayahNumberInSurah };
+                this.state.lastPlayed = data;
+                localStorage.setItem('quran_last_played', JSON.stringify(data));
+                this.updateLastPlayedUI();
+            },
+
+            updateLastPlayedUI: function() {
+                const container = document.getElementById('last-played-container');
+                if (this.state.lastPlayed) {
+                    container.classList.remove('hidden');
+                    document.getElementById('last-played-surah-num').innerText = this.state.lastPlayed.surahNumber;
+                    document.getElementById('last-played-surah-name').innerText = this.state.lastPlayed.surahName;
+                    document.getElementById('last-played-arabic').innerText = this.state.lastPlayed.arabicName;
+                    document.getElementById('last-played-ayah-info').innerText = `আয়াত ${this.state.lastPlayed.ayahNumberInSurah}`;
+                } else {
+                    container.classList.add('hidden');
+                }
+            },
+
+            resumeLastPlayed: async function() {
+                if(this.state.lastPlayed) {
+                    const { surahNumber, ayahIndex } = this.state.lastPlayed;
+                    await this.openSurah(surahNumber);
+                    this.playSurahFromView(ayahIndex);
+                }
+            },
+
+            setupAudioListeners: function() {
+                this.audio.addEventListener('ended', () => {
+                    if (this.state.surahDetails && this.state.currentAyahIndex > -1) {
+                        if (this.state.currentAyahIndex < this.state.surahDetails.ayahs.length - 1) {
+                            this.playAyah(this.state.currentAyahIndex + 1);
+                        } else {
+                            if (this.state.isLooping) {
+                                this.playAyah(0);
+                            } else {
+                                this.pauseAudio();
+                                this.state.currentAyahIndex = -1;
+                                this.updatePlayerUI();
+                                this.highlightActiveAyah();
+                            }
+                        }
+                    }
+                });
+
+                this.audio.addEventListener('timeupdate', () => {
+                    if(this.audio.duration && this.state.surahDetails && !isNaN(this.audio.duration)) {
+                        const totalAyahs = this.state.surahDetails.ayahs.length;
+                        const currentAyah = this.state.currentAyahIndex;
+                        let baseProgress = (currentAyah / totalAyahs) * 100;
+                        let currentAyahProgress = (this.audio.currentTime / this.audio.duration) * (100 / totalAyahs);
+                        let totalProgress = baseProgress + currentAyahProgress;
+                        document.getElementById('progress-bar').style.width = `${totalProgress}%`;
+                    }
+                });
+
+                this.audio.addEventListener('error', () => {
+                    this.state.isPlaying = false;
+                    this.updatePlayerUI();
+                    this.showToast('এই ক্বারীর অডিও সার্ভারে পাওয়া যাচ্ছে না। অন্য ক্বারী নির্বাচন করুন।', 'error');
+                });
+            },
+
+            playAyah: async function(index) {
+                if (!this.state.surahDetails) return;
+                
+                const s = this.state.surahDetails;
+                const ayah = s.ayahs[index];
+                
+                try {
+                    this.audio.src = ayah.audioUrl.replace('http://', 'https://');
+                    
+                    const playPromise = this.audio.play();
+                    if (playPromise !== undefined) {
+                        await playPromise;
+                        this.state.currentAyahIndex = index;
+                        this.state.isPlaying = true;
+                        
+                        this.updatePlayerUI();
+                        this.highlightActiveAyah();
+                        this.adjustPlayerPosition();
+                        this.updateMediaSessionData();
+                        
+                        this.saveLastPlayed(s.number, index, s.englishName, s.name, ayah.numberInSurah);
+                        
+                        if(!document.getElementById('surah-view').classList.contains('hidden') && this.state.viewingSurah === this.state.currentSurah) {
+                            const activeEl = document.getElementById(`ayah-${index}`);
+                            if (activeEl) {
+                                const headerOffset = 110;
+                                const elementPosition = activeEl.getBoundingClientRect().top;
+                                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                                window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+                            }
+                        }
+                    }
+                } catch (error) {
+                    if (error.name !== 'AbortError') {
+                        this.state.isPlaying = false;
+                        this.updatePlayerUI();
+                        this.showToast('অডিও প্লে করতে সমস্যা হচ্ছে।', 'error');
+                    }
+                }
+            },
+
+            playSurahFromView: function(index) {
+                this.state.surahDetails = this.state.viewingSurahDetails;
+                this.state.currentSurah = this.state.surahDetails.number;
+                
+                if(index === -1) {
+                    this.playAyah(0);
+                } else {
+                    if (this.state.currentAyahIndex === index && this.state.isPlaying) {
+                        this.pauseAudio();
+                    } else {
+                        this.playAyah(index);
+                    }
+                }
+            },
+
+            togglePlayPause: async function() {
+                if (this.state.currentAyahIndex === -1 && this.state.surahDetails) {
+                    this.playAyah(0);
+                    return;
+                }
+                
+                if (this.state.isPlaying) {
+                    this.pauseAudio();
+                } else {
+                    try {
+                        const playPromise = this.audio.play();
+                        if (playPromise !== undefined) {
+                            await playPromise;
+                            this.state.isPlaying = true;
+                            this.updatePlayerUI();
+                            this.highlightActiveAyah();
+                            this.adjustPlayerPosition();
+                            this.updateMediaSessionData();
+                        }
+                    } catch (error) {
+                        if (error.name !== 'AbortError') this.showToast('প্লে করতে সমস্যা হচ্ছে।', 'error');
+                    }
+                }
+            },
+
+            pauseAudio: function() {
+                if (!this.audio.paused) this.audio.pause();
+                this.state.isPlaying = false;
+                this.updatePlayerUI();
+                this.highlightActiveAyah();
+            },
+
+            playNext: function() {
+                if (this.state.surahDetails && this.state.currentAyahIndex < this.state.surahDetails.ayahs.length - 1) {
+                    this.playAyah(this.state.currentAyahIndex + 1);
+                }
+            },
+
+            playPrev: function() {
+                if (this.state.surahDetails && this.state.currentAyahIndex > 0) {
+                    this.playAyah(this.state.currentAyahIndex - 1);
+                }
+            },
+
+            toggleLoop: function() {
+                this.state.isLooping = !this.state.isLooping;
+                const btn = document.getElementById('loop-btn');
+                if (this.state.isLooping) {
+                    btn.classList.add('text-primary', 'bg-primary-soft', 'scale-110');
+                    btn.classList.remove('text-muted');
+                } else {
+                    btn.classList.remove('text-primary', 'bg-primary-soft', 'scale-110');
+                    btn.classList.add('text-muted');
+                }
+            },
+
+            fetchSurahsList: async function() {
+                try {
+                    const res = await fetch('https://api.alquran.cloud/v1/surah');
+                    const data = await res.json();
+                    this.state.surahs = data.data;
+                    this.renderSurahGrid();
+                    if(this.state.currentTab === 'favorites') this.renderFavoritesGrid();
+                } catch (error) {
+                    document.getElementById('surah-grid').innerHTML = '<p class="text-center text-red-500 py-10 font-bold text-base"><i class="fa-solid fa-wifi mr-2"></i> ইন্টারনেট কানেকশন চেক করুন।</p>';
+                } finally {
+                    document.getElementById('home-loading').classList.add('hidden');
+                }
+            },
+
+            toggleFavorite: function(e, surahNumber) {
+                if(e) e.stopPropagation();
+                surahNumber = Number(surahNumber);
+                
+                const index = this.state.favorites.indexOf(surahNumber);
+                const isAdding = index === -1;
+
+                if (isAdding) {
+                    this.state.favorites.push(surahNumber);
+                    this.showToast('সূরাটি বুকমার্কে যুক্ত করা হয়েছে', 'success');
+                } else {
+                    this.state.favorites.splice(index, 1);
+                    this.showToast('সূরাটি বুকমার্ক থেকে সরানো হয়েছে', 'info');
+                }
+                localStorage.setItem('quran_favorites', JSON.stringify(this.state.favorites));
+                
+                document.querySelectorAll(`.fav-icon-${surahNumber}`).forEach(icon => {
+                    if (isAdding) {
+                        icon.classList.remove('fa-regular', 'text-muted');
+                        icon.classList.add('fa-solid', 'text-accent', 'drop-shadow-md', 'animate-star-pop');
+                        setTimeout(() => icon.classList.remove('animate-star-pop'), 600);
+                    } else {
+                        icon.classList.remove('fa-solid', 'text-accent', 'drop-shadow-md', 'animate-star-pop');
+                        icon.classList.add('fa-regular', 'text-muted');
+                    }
+                });
+
+                if(this.state.currentTab === 'favorites' && !isAdding) {
+                    setTimeout(() => this.renderFavoritesGrid(), 300);
+                }
+            },
+
+            filterSurahs: function() {
+                this.state.searchQuery = document.getElementById('search-input').value.toLowerCase();
+                this.renderSurahGrid();
+            },
+
+            _createSurahCardHTML: function(surah, index) {
+                const isFav = this.state.favorites.includes(surah.number);
+                const delay = index * 0.05; 
+                const starClass = isFav ? 'fa-solid text-accent drop-shadow-md' : 'fa-regular text-muted';
+
+                return `
+                    <div class="stagger-item bg-surface p-5 rounded-[1.5rem] border border-bordercolor flex items-center justify-between cursor-pointer hover:border-primary/40 hover:shadow-card-hover transition-all duration-400 active:scale-[0.97] group" style="animation-delay: ${delay}s" onclick="app.openSurah(${surah.number})">
+                        <div class="flex items-center space-x-5">
+                            <div class="w-12 h-12 rounded-2xl bg-main flex items-center justify-center font-extrabold text-[16px] text-content border border-bordercolor shadow-sm surah-number-badge group-hover:bg-primary group-hover:text-white group-hover:scale-110 transition-all duration-400">
+                                <span class="relative z-10">${surah.number}</span>
+                            </div>
+                            <div>
+                                <h3 class="font-extrabold text-lg text-content font-sans group-hover:text-primary transition-colors tracking-tight">${surah.englishName}</h3>
+                                <p class="text-[12px] font-bold text-muted mt-1 uppercase tracking-wide">${surah.revelationType === 'Meccan' ? 'মাক্কী' : 'মাদানী'} • <span class="text-primary/80">${surah.numberOfAyahs} আয়াত</span></p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4">
+                            <p class="text-2xl font-arabic text-primary text-right opacity-90 group-hover:scale-110 transition-transform duration-500">${surah.name}</p>
+                            <button onclick="app.toggleFavorite(event, ${surah.number})" class="text-2xl w-12 h-12 flex items-center justify-center rounded-full transition-all hover:bg-accent/10 active:scale-75">
+                                <i class="fav-icon-${surah.number} fa-star ${starClass} transition-colors duration-300"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            },
+
+            renderSurahGrid: function() {
+                const grid = document.getElementById('surah-grid');
+                const emptyState = document.getElementById('empty-state');
+                grid.innerHTML = '';
+                
+                let filtered = this.state.surahs.filter(s => {
+                    return s.englishName.toLowerCase().includes(this.state.searchQuery) || 
+                           s.name.includes(this.state.searchQuery) || 
+                           s.englishNameTranslation.toLowerCase().includes(this.state.searchQuery);
+                });
+
+                if (filtered.length === 0) {
+                    emptyState.classList.remove('hidden');
+                } else {
+                    emptyState.classList.add('hidden');
+                    filtered.forEach((surah, index) => { grid.innerHTML += this._createSurahCardHTML(surah, index); });
+                }
+            },
+
+            renderFavoritesGrid: function() {
+                const grid = document.getElementById('favorites-grid');
+                const emptyState = document.getElementById('fav-empty-state');
+                grid.innerHTML = '';
+
+                let favSurahs = this.state.surahs.filter(s => this.state.favorites.includes(s.number));
+
+                if (favSurahs.length === 0) {
+                    emptyState.classList.remove('hidden');
+                } else {
+                    emptyState.classList.add('hidden');
+                    favSurahs.forEach((surah, index) => { grid.innerHTML += this._createSurahCardHTML(surah, index); });
+                }
+            },
+
+            openSurah: async function(number) {
+                if(!document.getElementById('surah-view').classList.contains('hidden') && this.state.viewingSurah === number) {
+                    return;
+                }
+
+                ['home', 'favorites', 'settings'].forEach(tab => document.getElementById(`tab-${tab}`).classList.add('hidden'));
+                document.getElementById('surah-view').classList.remove('hidden');
+                document.getElementById('details-loading').classList.remove('hidden');
+                document.getElementById('surah-content').classList.add('hidden');
+                
+                document.getElementById('back-btn').classList.remove('hidden');
+                document.getElementById('app-title').classList.add('hidden');
+                document.getElementById('header-search-btn').style.display = 'none';
+                document.getElementById('surah-title').classList.remove('hidden');
+
+                this.state.viewingSurah = number;
+                this.adjustPlayerPosition(); 
+                window.scrollTo({ top: 0, behavior: 'instant' });
+
+                try {
+                    const res = await fetch(`https://api.alquran.cloud/v1/surah/${number}/editions/quran-uthmani,bn.bengali,en.transliteration,${this.state.qari}`);
+                    const data = await res.json();
+                    
+                    const arabic = data.data[0];
+                    const bengali = data.data[1];
+                    const translit = data.data[2];
+                    const audio = data.data[3];
+
+                    const formattedAyahs = arabic.ayahs.map((ayah, index) => ({
+                        numberInSurah: ayah.numberInSurah,
+                        arabicText: ayah.text,
+                        bengaliText: bengali.ayahs[index].text,
+                        transliterationText: translit.ayahs[index].text,
+                        audioUrl: audio.ayahs[index].audio,
+                    }));
+
+                    const newSurahDetails = {
+                        number: arabic.number,
+                        name: arabic.name,
+                        englishName: arabic.englishName,
+                        englishNameTranslation: arabic.englishNameTranslation,
+                        revelationType: arabic.revelationType === 'Meccan' ? 'মাক্কী' : 'মাদানী',
+                        numberOfAyahs: arabic.numberOfAyahs,
+                        ayahs: formattedAyahs
+                    };
+
+                    document.getElementById('surah-title').innerText = arabic.englishName;
+
+                    if (!this.state.isPlaying || this.state.currentSurah !== number) {
+                        this.state.surahDetails = newSurahDetails;
+                        if(!this.state.isPlaying) {
+                            this.state.currentSurah = number;
+                        }
+                    }
+
+                    this.renderSurahContent(newSurahDetails);
+                    
+                    if(!this.state.isPlaying || this.state.currentSurah !== number) {
+                        this.state.currentAyahIndex = -1;
+                        this.pauseAudio();
+                    }
+                    this.updatePlayerUI();
+                    this.adjustPlayerPosition();
+
+                } catch (error) {
+                    this.showToast('তথ্য লোড করতে সমস্যা হচ্ছে।', 'error');
+                    this.closeSurah();
+                } finally {
+                    document.getElementById('details-loading').classList.add('hidden');
+                    document.getElementById('surah-content').classList.remove('hidden');
+                }
+            },
+
+            returnToCurrentSurah: function(event) {
+                if(event) event.stopPropagation();
+                if(this.state.currentSurah && this.state.surahDetails) {
+                    this.openSurah(this.state.currentSurah).then(() => {
+                        if (this.state.currentAyahIndex > -1) {
+                            setTimeout(() => {
+                                const activeEl = document.getElementById(`ayah-${this.state.currentAyahIndex}`);
+                                if (activeEl) {
+                                    const headerOffset = 110;
+                                    const elementPosition = activeEl.getBoundingClientRect().top;
+                                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                                    window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+                                }
+                            }, 400);
+                        }
+                    });
+                }
+            },
+
+            renderSurahContent: function(detailsToRender) {
+                const s = detailsToRender || this.state.surahDetails;
+                if(!s) return;
+
+                const isFav = this.state.favorites.includes(s.number);
+                const starClass = isFav ? 'fa-solid text-accent drop-shadow-md' : 'fa-regular';
+                
+                let html = `
+                    <div class="stagger-item bg-gradient-to-br from-primary via-primary-hover to-primary rounded-[2.5rem] p-8 md:p-10 mb-8 text-center shadow-premium relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-islamic-pattern opacity-30 pointer-events-none mix-blend-overlay group-hover:scale-110 transition-transform duration-[2s]"></div>
+                        <div class="absolute -right-16 -top-16 w-64 h-64 bg-white/10 rounded-full blur-[3xl] pointer-events-none"></div>
+                        
+                        <div class="flex justify-between items-start mb-6 relative z-10">
+                            <span class="bg-black/20 text-white text-[12px] font-extrabold px-5 py-2 rounded-full border border-white/20 backdrop-blur-md shadow-inner tracking-widest uppercase">${s.revelationType} • ${s.numberOfAyahs} আয়াত</span>
+                            <button onclick="app.toggleFavorite(event, ${s.number})" class="text-3xl text-white hover:scale-125 active:scale-90 transition-all drop-shadow-lg w-12 h-12 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-md border border-white/20">
+                                <i class="fav-icon-${s.number} fa-star ${starClass}"></i>
+                            </button>
+                        </div>
+
+                        <h2 class="text-[4rem] md:text-[5rem] font-arabic text-accent mb-2 drop-shadow-lg relative z-10">${s.name}</h2>
+                        <h3 class="text-3xl md:text-4xl font-extrabold text-white font-sans relative z-10 tracking-tight drop-shadow-md">${s.englishName}</h3>
+                        <p class="text-base font-bold text-primary-soft mb-10 relative z-10 drop-shadow-sm">${s.englishNameTranslation}</p>
+                        
+                        <button onclick="app.playSurahFromView(-1)" class="w-full bg-white text-primary hover:bg-main py-5 rounded-2xl font-extrabold text-lg flex items-center justify-center transition-all shadow-[0_10px_30px_rgba(0,0,0,0.2)] hover:shadow-premium active:scale-[0.98] relative z-10">
+                            <i class="fa-solid fa-play mr-3 text-xl"></i> সম্পূর্ণ তেলাওয়াত শুরু করুন
+                        </button>
+                    </div>
+                `;
+
+                if (s.number !== 9 && s.number !== 1) {
+                    html += `
+                        <div class="stagger-item text-center py-8 mb-8 bg-surface rounded-[2rem] shadow-sm border border-bordercolor relative overflow-hidden" style="animation-delay: 0.1s">
+                            <div class="absolute inset-0 bg-accent/5 opacity-60 bg-islamic-pattern pointer-events-none"></div>
+                            <p class="quran-arabic-text font-arabic text-primary leading-normal relative z-10 drop-shadow-sm">
+                                بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
+                            </p>
+                        </div>
+                    `;
+                }
+
+                html += `<div class="space-y-5" id="ayahs-container">`;
+                
+                s.ayahs.forEach((ayah, index) => {
+                    const animDelay = 0.15 + (Math.min(index, 15) * 0.05); 
+                    html += `
+                        <div id="ayah-${index}" class="stagger-item ayah-card bg-surface rounded-[2rem] p-6 md:p-8 border border-bordercolor shadow-card relative group overflow-hidden" style="animation-delay: ${animDelay}s">
+                            <div class="absolute left-0 top-0 w-2 h-full bg-bordercolor group-hover:bg-primary transition-colors duration-400"></div>
+                            
+                            <!-- Header -->
+                            <div class="flex items-center justify-between mb-6 pb-5 border-b border-bordercolor/60">
+                                <div class="w-11 h-11 rounded-xl bg-main text-primary text-sm font-extrabold flex items-center justify-center border border-bordercolor shadow-inner surah-number-badge transform group-hover:scale-110 transition-transform">
+                                    <span class="relative z-10">${ayah.numberInSurah}</span>
+                                </div>
+                                <button onclick="app.playSurahFromView(${index})" id="btn-play-${index}" class="w-12 h-12 rounded-full bg-main text-primary hover:bg-primary hover:text-white transition-all shadow-sm hover:shadow-md flex items-center justify-center border border-bordercolor active:scale-90">
+                                    <i class="fa-solid fa-play ml-1 text-base"></i>
+                                </button>
+                            </div>
+                            
+                            <!-- Arabic -->
+                            <div class="text-right mb-8">
+                                <p class="quran-arabic-text font-arabic text-content drop-shadow-sm selection:bg-accent/20 transition-all duration-300" dir="rtl">
+                                    ${ayah.arabicText} <span class="text-primary/70 mx-3 font-normal">۝</span>
+                                </p>
+                            </div>
+                            
+                            <!-- Translation -->
+                            <div class="bg-main/60 rounded-[1.5rem] p-6 border border-bordercolor space-y-4">
+                                <div>
+                                    <p class="quran-translation-text font-bold text-content font-bengali transition-all duration-300">
+                                        ${ayah.bengaliText}
+                                    </p>
+                                </div>
+                                <div>
+                                    <h4 class="text-[11px] font-extrabold text-accent uppercase tracking-[0.2em] mb-1.5 font-sans">উচ্চারণ</h4>
+                                    <p class="quran-transliteration-text font-semibold text-muted font-sans border-l-4 border-accent/40 pl-4 py-1 transition-all duration-300">
+                                        ${ayah.transliterationText}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                html += `</div>`;
+                document.getElementById('surah-content').innerHTML = html;
+                
+                this.state.viewingSurahDetails = s;
+                this.highlightActiveAyah();
+            },
+
+            updatePlayerUI: function() {
+                const s = this.state.surahDetails;
+                if (!s) return;
+
+                document.getElementById('player-surah-name').innerText = s.englishName;
+                
+                let currentNum = "--";
+                const eqAnimation = document.getElementById('player-eq');
+                const ayahNumText = document.getElementById('player-ayah-num');
+
+                if (this.state.currentAyahIndex > -1) {
+                    currentNum = s.ayahs[this.state.currentAyahIndex].numberInSurah;
+                } else {
+                    document.getElementById('progress-bar').style.width = `0%`;
+                }
+                
+                ayahNumText.innerText = currentNum;
+
+                if (this.state.isPlaying) {
+                    eqAnimation.classList.remove('hidden');
+                    ayahNumText.classList.add('hidden');
+                    document.getElementById('now-playing-label').innerText = "Playing Ayah " + currentNum;
+                    document.getElementById('play-pause-icon').className = "fa-solid fa-pause text-2xl";
+                } else {
+                    eqAnimation.classList.add('hidden');
+                    ayahNumText.classList.remove('hidden');
+                    document.getElementById('now-playing-label').innerText = "Paused Ayah " + currentNum;
+                    document.getElementById('play-pause-icon').className = "fa-solid fa-play text-2xl ml-1";
+                }
+            },
+
+            highlightActiveAyah: function() {
+                if(document.getElementById('surah-view').classList.contains('hidden')) return;
+                if(this.state.viewingSurah !== this.state.currentSurah) return;
+
+                document.querySelectorAll('.ayah-card').forEach((card, idx) => {
+                    card.classList.remove('ayah-active');
+                    const btn = document.getElementById(`btn-play-${idx}`);
+                    if(btn) {
+                        btn.innerHTML = '<i class="fa-solid fa-play ml-1 text-base"></i>';
+                        btn.className = "w-12 h-12 rounded-full bg-main text-primary hover:bg-primary hover:text-white transition-all shadow-sm flex items-center justify-center border border-bordercolor";
+                    }
+                });
+
+                const activeIndex = this.state.currentAyahIndex;
+                if (activeIndex > -1 && this.state.isPlaying) {
+                    const activeCard = document.getElementById(`ayah-${activeIndex}`);
+                    if (activeCard) {
+                        activeCard.classList.add('ayah-active');
+                        const activeBtn = document.getElementById(`btn-play-${activeIndex}`);
+                        activeBtn.innerHTML = '<i class="fa-solid fa-pause text-base"></i>';
+                        activeBtn.className = "w-12 h-12 rounded-full bg-accent text-white transition-all shadow-lg flex items-center justify-center border-4 border-accent/30 animate-pulse scale-110";
+                    }
+                }
+            },
+
+            closeSurah: function() {
+                document.getElementById('surah-view').classList.add('hidden');
+                document.getElementById(`tab-${this.state.currentTab}`).classList.remove('hidden');
+                
+                document.getElementById('back-btn').classList.add('hidden');
+                document.getElementById('surah-title').classList.add('hidden');
+                document.getElementById('app-title').classList.remove('hidden');
+                document.getElementById('header-search-btn').style.display = this.state.currentTab === 'home' ? 'flex' : 'none';
+
+                this.state.viewingSurah = null;
+                this.adjustPlayerPosition(); 
+                window.scrollTo({ top: 0, behavior: 'instant' });
+            },
+
+            seekAudio: function(event) {
+                event.stopPropagation(); 
+                if (!this.audio.duration || !this.state.surahDetails) return;
+                
+                const container = event.currentTarget;
+                const clickPosition = event.offsetX;
+                const totalWidth = container.clientWidth;
+                const clickRatio = clickPosition / totalWidth;
+                
+                const totalAyahs = this.state.surahDetails.ayahs.length;
+                const targetAyahIndex = Math.floor(clickRatio * totalAyahs);
+                
+                if (targetAyahIndex !== this.state.currentAyahIndex) {
+                    this.playAyah(targetAyahIndex);
+                } else {
+                    const baseRatio = targetAyahIndex / totalAyahs;
+                    const ratioWithinAyah = (clickRatio - baseRatio) * totalAyahs;
+                    this.audio.currentTime = ratioWithinAyah * this.audio.duration;
+                }
+            }
+        };
+
+        window.onload = () => app.init();
+    </script>
+</body>
+</html>
